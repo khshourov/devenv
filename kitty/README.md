@@ -1,4 +1,4 @@
-To follow along with course [Neovim as a PHP and Javascript IDE](https://laracasts.com/series/neovim-as-a-php-ide), I've installed kitty. 
+To follow along with course [Neovim as a PHP and Javascript IDE](https://laracasts.com/series/neovim-as-a-php-ide), I've installed kitty(`brew install kitty`).
 All the configuration of kitty copied from [Jess Archer's github](https://github.com/jessarcher/dotfiles/tree/master).
 
 You need to install JetBrainsMono Nerd Font from [NerdFonts](https://www.nerdfonts.com/font-downloads). We are using it in kitty.conf file.
