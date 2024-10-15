@@ -1,23 +1,16 @@
-local dashboard = require('dashboard')
-
-dashboard.custom_header = {
-  '',
-  '',
-  '  ⢸⣦⡈⠻⣿⣿⣿⣶⣄',
-  '    ⢸⣿⣿⣦⡈⠻⣿⣿⣿⣷⣄',
-  '⣀⣀⣀⣀⣀⣀⣼⣿⣿⣿⣿ ⠈⠻⣿⣿⣿⣷⣄',
-  '  ⠈⠻⣿⣿⣿⣿⣿⡿⠿⠛⠁   ⠈⠻⢿⣿⣿⣷⣄',
-  '',
-}
-
-dashboard.custom_center = {
-  { icon = '  ', desc = 'New file                       ', action = 'enew' },
-  { icon = '  ', shortcut = 'SPC f', desc = 'Find file                 ', action = 'Telescope find_files' },
-  { icon = '  ', shortcut = 'SPC h', desc = 'Recent files              ', action = 'Telescope oldfiles' },
-  { icon = '  ', shortcut = 'SPC g', desc = 'Find Word                 ', action = 'Telescope live_grep' },
-}
-
-dashboard.custom_footer = { '' }
+require('dashboard').setup({
+  theme = 'doom',
+  config = {
+    header = { '', '', '', '', '', '', '', '', '' },
+    center = {
+      { icon = '  ',                             key_format = '%s', desc = 'New file                  ', action = 'enew' },
+      { icon = '  ', key = 'f', keymap = 'SPC', key_format = ' %s', desc = 'Find file                 ', action = 'Telescope find_files' },
+      { icon = '  ', key = 'h', keymap = 'SPC', key_format = ' %s', desc = 'Recent files              ', action = 'Telescope oldfiles' },
+      { icon = '  ', key = 'g', keymap = 'SPC', key_format = ' %s', desc = 'Find Word                 ', action = 'Telescope live_grep' },
+    },
+    footer = { '' }
+  }
+})
 
 vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#6272a4' })
 vim.api.nvim_set_hl(0, 'DashboardCenter', { fg = '#f8f8f2' })

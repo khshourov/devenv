@@ -198,7 +198,9 @@ use({
 
 -- Add a dashboard.
 use({
-  'glepnir/dashboard-nvim',
+  'nvimdev/dashboard-nvim',
+  requires = 'nvim-tree/nvim-web-devicons',
+  event = 'VimEnter',
   config = function()
     require('user/plugins/dashboard-nvim')
   end
