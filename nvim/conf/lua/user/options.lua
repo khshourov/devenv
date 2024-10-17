@@ -39,3 +39,4 @@ vim.opt.exrc = true
 vim.opt.secure = true
 vim.opt.titlestring = '%f // nvim'
 vim.opt.inccommand = 'split'
+vim.opt.signcolumn = 'yes:1'
