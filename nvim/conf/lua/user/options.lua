@@ -40,3 +40,4 @@ vim.opt.secure = true
 vim.opt.titlestring = '%f // nvim'
 vim.opt.inccommand = 'split'
 vim.opt.signcolumn = 'yes:1'
+vim.g.skip_ts_context_commentstring_module = true
