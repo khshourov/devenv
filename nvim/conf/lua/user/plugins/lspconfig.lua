@@ -2,11 +2,23 @@
 require('mason').setup()
 require('mason-lspconfig').setup({ automatic_installation = true })
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 -- Lua language server
-require('lspconfig').lua_ls.setup({})
+require('lspconfig').lua_ls.setup({ capabilities = capabilities })
 
 -- Typescript & Javascript language server
-require('lspconfig').ts_ls.setup({})
+require('lspconfig').ts_ls.setup({ capabilities = capabilities })
+
+-- JSON
+require('lspconfig').jsonls.setup({
+  capabilities = capabilities,
+  settings = {
+    json = {
+      schemas = require('schemastore').json.schemas(),
+    },
+  },
+})
 
 -- Keymaps
 vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
