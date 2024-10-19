@@ -3,10 +3,10 @@ require('dashboard').setup({
   config = {
     header = { '', '', '', '', '', '', '', '', '' },
     center = {
-      { icon = '  ',                             key_format = '%s', desc = 'New file                  ', action = 'enew' },
-      { icon = '  ', key = 'f', keymap = 'SPC', key_format = ' %s', desc = 'Find file                 ', action = 'Telescope find_files' },
-      { icon = '  ', key = 'h', keymap = 'SPC', key_format = ' %s', desc = 'Recent files              ', action = 'Telescope oldfiles' },
-      { icon = '  ', key = 'g', keymap = 'SPC', key_format = ' %s', desc = 'Find Word                 ', action = 'Telescope live_grep' },
+      { icon = '  ',                              key_format = '%s',  desc = 'New file                  ', action = 'enew' },
+      { icon = '  ', key = 'f', keymap = 'SPC f', key_format = ' %s', desc = 'Find file                 ', action = 'Telescope find_files' },
+      { icon = '  ', key = 'h', keymap = 'SPC h', key_format = ' %s', desc = 'Recent files              ', action = 'Telescope oldfiles' },
+      { icon = '  ', key = 'g', keymap = 'SPC g', key_format = ' %s', desc = 'Find Word                 ', action = 'Telescope live_grep' },
     },
     footer = { '' }
   }
