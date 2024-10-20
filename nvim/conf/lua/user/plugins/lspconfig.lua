@@ -25,13 +25,13 @@ require('null-ls').setup({
   sources = {
     require('null-ls').builtins.diagnostics.eslint_d.with({
       condition = function(utils)
-        return utils.root_has_file({ '.eslint.config.js' })
+        return utils.root_has_file({ '.eslint.config.mjs' })
       end,
     }),
     require('null-ls').builtins.diagnostics.trail_space.with({ disabled_filetypes = { 'NvimTree' } }),
     require('null-ls').builtins.formatting.eslint_d.with({
       condition = function(utils)
-        return utils.root_has_file({ '.eslint.config.js' })
+        return utils.root_has_file({ '.eslint.config.mjs' })
       end,
     }),
     require('null-ls').builtins.formatting.prettierd,
