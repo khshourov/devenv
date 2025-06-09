@@ -20,24 +20,62 @@ require('lspconfig').jsonls.setup({
   },
 })
 
--- null-ls
-require('null-ls').setup({
-  sources = {
-    require('null-ls').builtins.diagnostics.eslint_d.with({
-      condition = function(utils)
-        return utils.root_has_file({ '.eslint.config.mjs' })
+--- nvim-lint setup (Diagnostics)
+local lint = require("lint")
+
+lint.linters_by_ft = {
+  javascript = { "eslint_d" },
+  typescript = { "eslint_d" },
+  json = {},
+  -- Add more filetypes if needed
+}
+
+lint.linters.eslint_d.condition = function(ctx)
+  return vim.fs.find(".eslint.config.mjs", { upward = true, path = ctx.filename })[1] ~= nil
+end
+
+-- Trailing space checker
+lint.linters.trail_space = {
+  cmd = "grep",
+  stdin = false,
+  args = { "-nH", "\\s\\+$" },
+  stream = "stderr",
+  ignore_exitcode = true,
+  parser = require("lint.parser").from_pattern(
+    "([^:]+):(%d+):() (.+)",
+    { "filename", "lnum", "col", "message" },
+    { source = "trail_space", severity = vim.diagnostic.severity.WARN }
+  )
+}
+
+vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+  callback = function()
+    if vim.bo.filetype ~= "NvimTree" then
+      lint.try_lint()
+      lint.try_lint("trail_space")
+    end
+  end,
+})
+
+-- conform.nvim setup (Formatting)
+require("conform").setup({
+  format_on_save = {
+    lsp_fallback = true,
+  },
+  formatters_by_ft = {
+    javascript = { "eslint_d", "prettierd" },
+    typescript = { "eslint_d", "prettierd" },
+    json = { "prettierd" },
+    -- Add more as needed
+  },
+  formatters = {
+    eslint_d = {
+      condition = function(ctx)
+        return vim.fs.find(".eslint.config.mjs", { upward = true, path = ctx.filename })[1] ~= nil
       end,
-    }),
-    require('null-ls').builtins.diagnostics.trail_space.with({ disabled_filetypes = { 'NvimTree' } }),
-    require('null-ls').builtins.formatting.eslint_d.with({
-      condition = function(utils)
-        return utils.root_has_file({ '.eslint.config.mjs' })
-      end,
-    }),
-    require('null-ls').builtins.formatting.prettierd,
+    },
   },
 })
-require('mason-null-ls').setup({ automatic_installation = true })
 
 -- Keymaps
 vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
