@@ -1,8 +1,8 @@
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -13,12 +13,12 @@ local packer_bootstrap = ensure_packer()
 
 require('packer').reset()
 require('packer').init({
-    compile_path = vim.fn.stdpath('data')..'/site/plugin/packer_compiled.lua',
-    display = {
-      open_fn = function()
-        return require('packer.util').float({ border = 'solid' })
-      end,
-    },
+  compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.lua',
+  display = {
+    open_fn = function()
+      return require('packer.util').float({ border = 'solid' })
+    end,
+  },
 })
 
 local use = require('packer').use
@@ -26,30 +26,30 @@ use('wbthomason/packer.nvim')
 
 -- One Dark theme.
 use({
-    'jessarcher/onedark.nvim',
-    config = function()
-      vim.cmd('colorscheme onedark')
+  'jessarcher/onedark.nvim',
+  config = function()
+    vim.cmd('colorscheme onedark')
 
-      vim.api.nvim_set_hl(0, 'FloatBorder', {
-          fg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
-          bg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
-      })
+    vim.api.nvim_set_hl(0, 'FloatBorder', {
+      fg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
+      bg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
+    })
 
 
-      vim.api.nvim_set_hl(0, 'CursorLineBg', {
-        fg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
-        bg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
-      })
+    vim.api.nvim_set_hl(0, 'CursorLineBg', {
+      fg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
+      bg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
+    })
 
-      vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = '#30323E' })
+    vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = '#30323E' })
 
-      vim.api.nvim_set_hl(0, 'StatusLineNonText', {
-          fg = vim.api.nvim_get_hl_by_name('NonText', true).foreground,
-          bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background,
-        })
+    vim.api.nvim_set_hl(0, 'StatusLineNonText', {
+      fg = vim.api.nvim_get_hl_by_name('NonText', true).foreground,
+      bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background,
+    })
 
-      vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = '#2F313C' })
-    end,
+    vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = '#2F313C' })
+  end,
 })
 
 -- Commenting support
@@ -139,33 +139,33 @@ use({
 
 -- Automatically fix indentation when pasting code.
 use({
-    'sickill/vim-pasta',
-    config = function()
-      vim.g.pasta_disabled_filetypes = { 'fugitive' }
-    end,
+  'sickill/vim-pasta',
+  config = function()
+    vim.g.pasta_disabled_filetypes = { 'fugitive' }
+  end,
 })
 
 -- Fuzzy finder
 use({
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'kyazdani42/nvim-web-devicons',
-      'nvim-telescope/telescope-live-grep-args.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make'  },
-    },
-    config = function()
-      require('user/plugins/telescope')
-    end,
+  'nvim-telescope/telescope.nvim',
+  requires = {
+    'nvim-lua/plenary.nvim',
+    'kyazdani42/nvim-web-devicons',
+    'nvim-telescope/telescope-live-grep-args.nvim',
+    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+  },
+  config = function()
+    require('user/plugins/telescope')
+  end,
 })
 
 -- File tree sidebar
 use({
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('user/plugins/nvim-tree')
-    end,
+  'kyazdani42/nvim-tree.lua',
+  requires = 'kyazdani42/nvim-web-devicons',
+  config = function()
+    require('user/plugins/nvim-tree')
+  end,
 })
 
 -- A Status line.
@@ -243,17 +243,17 @@ use({
 
 -- Improved syntax highlighting
 use({
-    'nvim-treesitter/nvim-treesitter',
-    run = function()
-      require('nvim-treesitter.install').update({ with_sync = true })
-    end,
-    requires = {
-      'JoosepAlviste/nvim-ts-context-commentstring',
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
-    config = function()
-      require('user/plugins/treesitter')
-    end,
+  'nvim-treesitter/nvim-treesitter',
+  run = function()
+    require('nvim-treesitter.install').update({ with_sync = true })
+  end,
+  requires = {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
+  config = function()
+    require('user/plugins/treesitter')
+  end,
 })
 
 -- Language Server Protocol.
@@ -290,10 +290,10 @@ use({
 
 -- install without yarn or npm
 use({
-    "iamcco/markdown-preview.nvim",
-    run = function()
-      vim.fn["mkdp#util#install"]()
-    end,
+  "iamcco/markdown-preview.nvim",
+  run = function()
+    vim.fn["mkdp#util#install"]()
+  end,
 })
 
 use({
@@ -305,11 +305,15 @@ use({
   ft = { "markdown" },
 })
 
+-- Rust
+use({
+  "rust-lang/rust.vim"
+})
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
-    require('packer').sync()
+  require('packer').sync()
 end
 
 vim.cmd([[
